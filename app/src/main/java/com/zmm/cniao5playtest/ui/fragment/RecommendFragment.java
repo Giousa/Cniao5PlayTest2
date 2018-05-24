@@ -1,18 +1,11 @@
 package com.zmm.cniao5playtest.ui.fragment;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.zmm.cniao5playtest.AppApplication;
 import com.zmm.cniao5playtest.R;
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.di.component.AppComponent;
@@ -108,7 +101,7 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
     }
 
     @Override
-    public void dimissLoading() {
+    public void dismissLoading() {
 
         if(mProgressDialog.isShowing()){
             mProgressDialog.dismiss();

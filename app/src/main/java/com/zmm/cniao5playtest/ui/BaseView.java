@@ -8,6 +8,6 @@ public interface BaseView {
 
 
     void showLodading();
-    void dimissLoading();
+    void dismissLoading();
 
 }

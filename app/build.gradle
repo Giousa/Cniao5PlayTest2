@@ -31,23 +31,33 @@ dependencies {
     //字体
     compile 'com.mikepenz:iconics-core:3.0.1@aar'
     compile 'com.mikepenz:ionicons-typeface:2.0.1.4@aar'
+
     //butterknife
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    ////RxJava
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
     // okHttp
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
     //picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+
     //Dagger注入
     compile 'com.google.dagger:dagger:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     compile 'com.google.dagger:dagger-android:2.11'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+
     //path
     compile 'com.eftimoff:android-pathview:1.0.8@aar'
 }
