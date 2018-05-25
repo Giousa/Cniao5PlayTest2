@@ -1,5 +1,9 @@
 package com.zmm.cniao5playtest.di.module;
 
+import android.app.Application;
+
+import com.zmm.cniao5playtest.AppApplication;
+import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.data.http.ApiService;
 
 import java.util.concurrent.TimeUnit;
@@ -74,4 +78,11 @@ public class HttpModule {
     public ApiService provideApiService(Retrofit retrofit){
         return retrofit.create(ApiService.class);
     }
+
+    @Provides
+    @Singleton
+    public RxErrorHandler provideErrorHandler(Application application){
+        return new RxErrorHandler(application);
+    }
+
 }

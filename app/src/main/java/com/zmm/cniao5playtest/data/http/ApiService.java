@@ -2,9 +2,9 @@ package com.zmm.cniao5playtest.data.http;
 
 
 import com.zmm.cniao5playtest.bean.AppInfo;
+import com.zmm.cniao5playtest.bean.BaseBean;
 import com.zmm.cniao5playtest.bean.PageBean;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -16,7 +16,7 @@ import rx.Observable;
 public interface ApiService {
 
 
-    public static final String BASE_URL = "http://112.124.22.238:8081/course_api/cniaoplay/";
+    String BASE_URL = "http://112.124.22.238:8081/course_api/cniaoplay/";
 
 
 
@@ -24,8 +24,11 @@ public interface ApiService {
 //    @GET("featured")
 //    public Call<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
 
-    @GET("featured")
-    Observable<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
+//    @GET("featured")
+//    Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
 
+
+    @GET("featured2")
+    Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
 
 }

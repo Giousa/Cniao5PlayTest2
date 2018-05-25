@@ -1,5 +1,8 @@
 package com.zmm.cniao5playtest.di.component;
 
+import android.app.Application;
+
+import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.data.http.ApiService;
 import com.zmm.cniao5playtest.di.module.AppModule;
 import com.zmm.cniao5playtest.di.module.HttpModule;
@@ -21,4 +24,8 @@ public interface AppComponent {
 
     //将HttpModule中的ApiService暴露出来，以便于其他依赖于AppComponent的Component调用
     ApiService getApiService();
+
+    Application getApplication();
+
+    RxErrorHandler getRxErrorHandler();
 }

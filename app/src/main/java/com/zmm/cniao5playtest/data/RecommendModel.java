@@ -2,6 +2,7 @@ package com.zmm.cniao5playtest.data;
 
 
 import com.zmm.cniao5playtest.bean.AppInfo;
+import com.zmm.cniao5playtest.bean.BaseBean;
 import com.zmm.cniao5playtest.bean.PageBean;
 import com.zmm.cniao5playtest.data.http.ApiService;
 
@@ -20,11 +21,9 @@ public class RecommendModel {
         mApiService = apiService;
     }
 
-    public Observable<PageBean<AppInfo>> getApps(){
+    public Observable<BaseBean<PageBean<AppInfo>>> getApps(){
 
-        Observable<PageBean<AppInfo>> mApiServiceApps = mApiService.getApps("{'page':0}");
-
-        return mApiServiceApps;
+        return mApiService.getApps("{'page':0}");
     }
 
 
