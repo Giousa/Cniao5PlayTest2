@@ -11,6 +11,7 @@ import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.common.rx.RxHttpResponseCompat;
 import com.zmm.cniao5playtest.common.rx.subscriber.ErrorHandlerSubscriber;
 import com.zmm.cniao5playtest.common.rx.subscriber.ProgressDialogSubscriber;
+import com.zmm.cniao5playtest.common.rx.subscriber.ProgressSubcriber;
 import com.zmm.cniao5playtest.data.RecommendModel;
 import com.zmm.cniao5playtest.presenter.contract.RecommendContract;
 
@@ -39,7 +40,7 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendCo
 
         mModel.getApps()
                 .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
-                .subscribe(new ProgressDialogSubscriber<PageBean<AppInfo>>(mContext) {
+                .subscribe(new ProgressSubcriber<PageBean<AppInfo>>(mContext,mView) {
                     @Override
                     public void onNext(PageBean<AppInfo> response) {
                         if(response != null && response.getDatas() != null){
@@ -50,6 +51,20 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendCo
                     }
 
                 });
+
+//        mModel.getApps()
+//                .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
+//                .subscribe(new ProgressDialogSubscriber<PageBean<AppInfo>>(mContext) {
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> response) {
+//                        if(response != null && response.getDatas() != null){
+//                            mView.showResult(response.getDatas());
+//                        } else{
+//                            mView.showNodata();
+//                        }
+//                    }
+//
+//                });
 //        mModel.getApps()
 //                .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
 //                .subscribe(new ErrorHandlerSubscriber<PageBean<AppInfo>>(mRxErrorHandler) {

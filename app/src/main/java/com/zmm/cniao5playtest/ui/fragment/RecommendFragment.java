@@ -45,6 +45,8 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     @Override
     protected void init() {
         mProgressDialog = new ProgressDialog(getActivity());
+
+        mPresenter.requestDatas();
     }
 
     @Override
@@ -52,7 +54,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
         DaggerRecommendComponent.builder().appComponent(appComponent).recommendModule(new RecommendModule(this)).build().inject(this);
 
-        mPresenter.requestDatas();
+
     }
 
     private void initRecycleView(List<AppInfo> datas){
@@ -87,11 +89,13 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     @Override
     public void showNodata() {
 
+        dismissLoading();
         Toast.makeText(getActivity(),"暂时无数据，请吃完饭再来", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showError(String msg) {
+        dismissLoading();
         Toast.makeText(getActivity(),"服务器开小差了："+msg, Toast.LENGTH_LONG).show();
     }
 
@@ -108,4 +112,10 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
             mProgressDialog.dismiss();
         }
     }
+
+    @Override
+    public void onEmptyViewClick() {
+        mPresenter.requestDatas();
+    }
+
 }

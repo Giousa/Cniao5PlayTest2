@@ -27,7 +27,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         mPathView.getPathAnimator()
                 .delay(50)
-                .duration(2000)
+                .duration(1000)
                 .listenerEnd(new PathView.AnimatorBuilder.ListenerEnd() {
                     @Override
                     public void onAnimationEnd() {
