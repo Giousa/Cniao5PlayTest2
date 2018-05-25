@@ -16,6 +16,8 @@ import rx.Observable;
 public interface ApiService {
 
 
+    String OSS_URL = "http://uog.oss-cn-shanghai.aliyuncs.com/data/";
+
     String BASE_URL = "http://112.124.22.238:8081/course_api/cniaoplay/";
 
 
@@ -27,6 +29,9 @@ public interface ApiService {
 //    @GET("featured")
 //    Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
 
+
+    @GET("recommend3.json")
+    Observable<BaseBean<PageBean<AppInfo>>> getApps2();
 
     @GET("featured2")
     Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);

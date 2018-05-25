@@ -60,4 +60,7 @@ dependencies {
 
     //path
     compile 'com.eftimoff:android-pathview:1.0.8@aar'
+
+    compile 'com.github.f0ris.sweetalert:library:1.5.1'
+
 }

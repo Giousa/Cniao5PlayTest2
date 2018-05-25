@@ -1,12 +1,16 @@
 package com.zmm.cniao5playtest.presenter;
 
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
+
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.BaseBean;
 import com.zmm.cniao5playtest.bean.PageBean;
 import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.common.rx.RxHttpResponseCompat;
 import com.zmm.cniao5playtest.common.rx.subscriber.ErrorHandlerSubscriber;
+import com.zmm.cniao5playtest.common.rx.subscriber.ProgressDialogSubscriber;
 import com.zmm.cniao5playtest.data.RecommendModel;
 import com.zmm.cniao5playtest.presenter.contract.RecommendContract;
 
@@ -24,50 +28,56 @@ import rx.schedulers.Schedulers;
 public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendContract.View> {
 
 
-    private RxErrorHandler mRxErrorHandler;
 
     @Inject
-    public RecommendPresenter(RecommendModel model, RecommendContract.View view, RxErrorHandler errorHandler) {
+    public RecommendPresenter(RecommendModel model, RecommendContract.View view) {
         super(model, view);
-        this.mRxErrorHandler = errorHandler;
     }
 
 
     public void requestDatas() {
 
-
-
-
         mModel.getApps()
                 .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
-                .subscribe(new ErrorHandlerSubscriber<PageBean<AppInfo>>(mRxErrorHandler) {
-
-                    @Override
-                    public void onStart() {
-                        mView.showLodading();
-
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        mView.dismissLoading();
-                    }
-
+                .subscribe(new ProgressDialogSubscriber<PageBean<AppInfo>>(mContext) {
                     @Override
                     public void onNext(PageBean<AppInfo> response) {
-                        System.out.println("---onNext---");
-                        if(response != null){
-                            System.out.println("---onNext---"+response.getDatas());
-
+                        if(response != null && response.getDatas() != null){
                             mView.showResult(response.getDatas());
                         } else{
                             mView.showNodata();
                         }
-
-                        mView.dismissLoading();
-
                     }
+
                 });
+//        mModel.getApps()
+//                .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
+//                .subscribe(new ErrorHandlerSubscriber<PageBean<AppInfo>>(mRxErrorHandler) {
+//
+//                    @Override
+//                    public void onStart() {
+//                        mView.showLodading();
+//
+//                    }
+//
+//                    @Override
+//                    public void onCompleted() {
+//                        mView.dismissLoading();
+//                    }
+//
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> response) {
+//                        if(response != null){
+//
+//                            mView.showResult(response.getDatas());
+//                        } else{
+//                            mView.showNodata();
+//                        }
+//
+//                        mView.dismissLoading();
+//
+//                    }
+//                });
 
 //        mModel.getApps()
 //                .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())

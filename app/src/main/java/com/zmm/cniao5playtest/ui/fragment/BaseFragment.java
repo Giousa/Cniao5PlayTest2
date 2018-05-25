@@ -1,5 +1,6 @@
 package com.zmm.cniao5playtest.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.zmm.cniao5playtest.di.component.AppComponent;
 import com.zmm.cniao5playtest.di.component.DaggerRecommendComponent;
 import com.zmm.cniao5playtest.di.module.RecommendModule;
 import com.zmm.cniao5playtest.presenter.BasePresenter;
+import com.zmm.cniao5playtest.ui.BaseView;
 
 import javax.inject.Inject;
 
@@ -26,7 +28,7 @@ import butterknife.Unbinder;
  * Time:下午1:25
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
 
 
@@ -38,6 +40,9 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     @Inject
     T mPresenter;
 
+    private ProgressDialog mProgressDialog;
+
+
 
     @Nullable
     @Override
@@ -46,9 +51,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         mRootView = inflater.inflate(setLayout(), container, false);
         mUnbinder = ButterKnife.bind(this, mRootView);
 
-        mAppApplication = (AppApplication) getActivity().getApplication();
 
-        init();
 
         return mRootView;
 
@@ -58,7 +61,10 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        mAppApplication = (AppApplication) getActivity().getApplication();
         setupActivityComponent(mAppApplication.getAppComponent());
+
+        init();
     }
 
     @Override
@@ -66,6 +72,21 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         super.onDestroy();
         if(mUnbinder != Unbinder.EMPTY){
             mUnbinder.unbind();
+        }
+    }
+
+
+    @Override
+    public void showLodading() {
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setMessage("loading...");
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void dismissLoading() {
+        if(mProgressDialog != null && mProgressDialog.isShowing()){
+            mProgressDialog.dismiss();
         }
     }
 

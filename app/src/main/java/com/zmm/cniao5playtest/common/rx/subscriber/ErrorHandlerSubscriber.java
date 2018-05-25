@@ -1,5 +1,8 @@
 package com.zmm.cniao5playtest.common.rx.subscriber;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.zmm.cniao5playtest.common.exception.BaseException;
 import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 
@@ -15,18 +18,30 @@ public abstract class ErrorHandlerSubscriber<T> extends DefaultSubscriber<T> {
 
     private RxErrorHandler mRxErrorHandler;
 
-    public ErrorHandlerSubscriber(RxErrorHandler rxErrorHandler) {
-        mRxErrorHandler = rxErrorHandler;
+    protected Context mContext;
+
+    public ErrorHandlerSubscriber(Context context){
+
+        this.mContext = context;
+
+
+        mRxErrorHandler = new RxErrorHandler(mContext);
+
     }
 
     @Override
     public void onError(Throwable e) {
 
 
-        System.out.println("---error---");
-        BaseException exception = mRxErrorHandler.handlerError(e);
+        e.printStackTrace();
+        BaseException baseException =  mRxErrorHandler.handlerError(e);
 
-        mRxErrorHandler.showErrorMessage(exception);
+        if(baseException == null){
+            e.printStackTrace();
+            Log.d("ErrorHandlerSubscriber",e.getMessage());
+        } else {
+            mRxErrorHandler.showErrorMessage(baseException);
+        }
 
     }
 }
