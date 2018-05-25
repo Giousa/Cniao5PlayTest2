@@ -7,7 +7,8 @@ package com.zmm.cniao5playtest.ui;
 public interface BaseView {
 
 
-    void showLodading();
+    void showLoading();
+    void showError(String msg);
     void dismissLoading();
 
 }

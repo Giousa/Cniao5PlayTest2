@@ -79,38 +79,6 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendCo
 //                    }
 //                });
 
-//        mModel.getApps()
-//                .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
-//                .subscribe(new Subscriber<PageBean<AppInfo>>() {
-//
-//                    @Override
-//                    public void onStart() {
-//                        mView.showLodading();
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        mView.dismissLoading();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        mView.dismissLoading();
-//                    }
-//
-//                    @Override
-//                    public void onNext(PageBean<AppInfo> response) {
-//                        if(response != null){
-//
-//                            mView.showResult(response.getDatas());
-//                        }
-//                        else{
-//                            mView.showNodata();
-//                        }
-//
-//                        mView.dismissLoading();
-//                    }
-//                });
 
 
     }

@@ -16,7 +16,7 @@ import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 public abstract class ErrorHandlerSubscriber<T> extends DefaultSubscriber<T> {
 
 
-    private RxErrorHandler mRxErrorHandler;
+    protected RxErrorHandler mRxErrorHandler = null;
 
     protected Context mContext;
 

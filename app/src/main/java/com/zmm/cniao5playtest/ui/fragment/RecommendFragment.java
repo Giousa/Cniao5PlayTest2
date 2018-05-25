@@ -24,7 +24,7 @@ import butterknife.BindView;
  * Created by Ivan on 16/9/26.
  */
 
-public class RecommendFragment extends BaseFragment<RecommendPresenter> implements RecommendContract.View {
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements RecommendContract.View {
 
     @BindView(R.id.recycle_view)
     RecyclerView mRecyclerView;
@@ -41,13 +41,14 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
         return R.layout.fragment_recomend;
     }
 
+
     @Override
     protected void init() {
         mProgressDialog = new ProgressDialog(getActivity());
     }
 
     @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
+    protected void setupAcitivtyComponent(AppComponent appComponent) {
 
         DaggerRecommendComponent.builder().appComponent(appComponent).recommendModule(new RecommendModule(this)).build().inject(this);
 
@@ -95,7 +96,7 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
     }
 
     @Override
-    public void showLodading() {
+    public void showLoading() {
 
         mProgressDialog.show();
     }
