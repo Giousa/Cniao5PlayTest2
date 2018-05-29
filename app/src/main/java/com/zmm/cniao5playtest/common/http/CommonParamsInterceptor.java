@@ -60,7 +60,8 @@ public class CommonParamsInterceptor  implements Interceptor {
 
                 HashMap<String,Object> commomParamsMap = new HashMap<>();
 
-                commomParamsMap.put(Constant.IMEI, DeviceUtils.getIMEI(mContext));
+//                commomParamsMap.put(Constant.IMEI, DeviceUtils.getIMEI(mContext));
+                commomParamsMap.put(Constant.IMEI, "test");
                 commomParamsMap.put(Constant.MODEL,DeviceUtils.getModel());
                 commomParamsMap.put(Constant.LANGUAGE,DeviceUtils.getLanguage());
                 commomParamsMap.put(Constant.os,DeviceUtils.getBuildVersionIncremental());

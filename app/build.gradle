@@ -63,4 +63,7 @@ dependencies {
 
     compile 'com.github.f0ris.sweetalert:library:1.5.1'
 
+    //权限授权
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+
 }

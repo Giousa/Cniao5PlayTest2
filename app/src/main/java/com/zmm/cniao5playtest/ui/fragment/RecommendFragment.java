@@ -47,6 +47,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         mProgressDialog = new ProgressDialog(getActivity());
 
         mPresenter.requestDatas();
+//        mPresenter.requestPermission();
     }
 
     @Override
@@ -98,6 +99,18 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         dismissLoading();
         Toast.makeText(getActivity(),"服务器开小差了："+msg, Toast.LENGTH_LONG).show();
     }
+
+//    @Override
+//    public void onRequestPermissonSuccess() {
+//        System.out.println("RecommendFragment 权限请求成功");
+//        mPresenter.requestDatas();
+//    }
+//
+//    @Override
+//    public void onRequestPermissonError() {
+//        System.out.println("RecommendFragment 权限请求失败");
+//
+//    }
 
     @Override
     public void showLoading() {

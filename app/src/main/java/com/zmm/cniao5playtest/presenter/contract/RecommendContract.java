@@ -20,6 +20,8 @@ public interface RecommendContract {
         void showError(String msg);
 
 
+//        void onRequestPermissonSuccess();
+//        void onRequestPermissonError();
     }
 
 
