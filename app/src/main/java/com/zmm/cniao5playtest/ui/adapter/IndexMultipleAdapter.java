@@ -95,6 +95,7 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
         else if(viewType==TYPE_APPS){
 
+            //传值null，就会自动计算高度，若是parent，不会重新计算高度
             return  new AppViewHolder(mLayoutInflater.inflate(R.layout.template_recyleview_with_title, null, false),TYPE_APPS);
         }
         else if(viewType==TYPE_GAMES){
@@ -128,6 +129,7 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
                 @Override
                 public void onItemClick(int position) {
 //                    banners.get(position)
+                    Toast.makeText(mContext,position+"  图片被点击了",Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -161,7 +163,7 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
             viewHolder.mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
                 @Override
                 public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                    Toast.makeText(mContext,"position = "+position+",类型："+TYPE_APPS,Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -178,7 +180,7 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onClick(View v) {
-
+        Toast.makeText(mContext,"栏目被点击了",Toast.LENGTH_SHORT).show();
     }
 
 
