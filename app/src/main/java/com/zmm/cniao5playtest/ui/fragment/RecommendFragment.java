@@ -8,11 +8,13 @@ import android.widget.Toast;
 
 import com.zmm.cniao5playtest.R;
 import com.zmm.cniao5playtest.bean.AppInfo;
+import com.zmm.cniao5playtest.bean.IndexBean;
 import com.zmm.cniao5playtest.di.component.AppComponent;
 import com.zmm.cniao5playtest.di.component.DaggerRecommendComponent;
 import com.zmm.cniao5playtest.di.module.RecommendModule;
 import com.zmm.cniao5playtest.presenter.RecommendPresenter;
 import com.zmm.cniao5playtest.presenter.contract.RecommendContract;
+import com.zmm.cniao5playtest.ui.adapter.IndexMultipleAdapter;
 import com.zmm.cniao5playtest.ui.adapter.RecomendAppAdatper;
 import com.zmm.cniao5playtest.ui.decoration.DividerItemDecoration;
 
@@ -29,7 +31,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     @BindView(R.id.recycle_view)
     RecyclerView mRecyclerView;
 
-    private RecomendAppAdatper mAdatper;
+    private IndexMultipleAdapter mAdatper;
 
 
 
@@ -46,6 +48,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     protected void init() {
         mProgressDialog = new ProgressDialog(getActivity());
 
+        initRecycleView();
         mPresenter.requestDatas();
 //        mPresenter.requestPermission();
     }
@@ -58,59 +61,30 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     }
 
-    private void initRecycleView(List<AppInfo> datas){
+    private void initRecycleView(){
 
 
         //为RecyclerView设置布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
-
-        //为RecyclerView设置分割线(这个可以对DividerItemDecoration进行修改，自定义)
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
-
         //动画
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        mAdatper = new RecomendAppAdatper(getActivity(),datas);
+    }
+
+
+    @Override
+    public void showResult(IndexBean indexBean) {
+
+        mAdatper = new IndexMultipleAdapter(getActivity());
+
+        mAdatper.setData(indexBean);
 
         mRecyclerView.setAdapter(mAdatper);
 
-
-
     }
 
-
-    @Override
-    public void showResult(List<AppInfo> datas) {
-        initRecycleView( datas);
-    }
-
-    @Override
-    public void showNodata() {
-
-        dismissLoading();
-        Toast.makeText(getActivity(),"暂时无数据，请吃完饭再来", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showError(String msg) {
-        dismissLoading();
-        Toast.makeText(getActivity(),"服务器开小差了："+msg, Toast.LENGTH_LONG).show();
-    }
-
-//    @Override
-//    public void onRequestPermissonSuccess() {
-//        System.out.println("RecommendFragment 权限请求成功");
-//        mPresenter.requestDatas();
-//    }
-//
-//    @Override
-//    public void onRequestPermissonError() {
-//        System.out.println("RecommendFragment 权限请求失败");
-//
-//    }
 
     @Override
     public void showLoading() {
@@ -130,5 +104,6 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     public void onEmptyViewClick() {
         mPresenter.requestDatas();
     }
+
 
 }

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.BaseBean;
+import com.zmm.cniao5playtest.bean.IndexBean;
 import com.zmm.cniao5playtest.bean.PageBean;
 import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.common.rx.RxHttpResponseCompat;
@@ -63,32 +64,41 @@ public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendCo
 
     public void requestDatas() {
 
-        RxPermissions rxPermissions = new RxPermissions((Activity) mContext);
-
-        rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
-                .flatMap(new Func1<Boolean, Observable<PageBean<AppInfo>>>() {
+        mModel.index().compose(RxHttpResponseCompat.<IndexBean>compatResult())
+                .subscribe(new ProgressSubcriber<IndexBean>(mContext,mView) {
                     @Override
-                    public Observable<PageBean<AppInfo>>call(Boolean aBoolean) {
+                    public void onNext(IndexBean indexBean) {
 
-                        if(aBoolean){
-
-                            System.out.println("允许权限");
-                            return  mModel.getApps().compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult());
-                        }
-                        else{
-                            System.out.println("拒绝权限");
-                            return Observable.empty();
-                        }
-
-
-                    }
-                })
-                .subscribe(new ProgressSubcriber<PageBean<AppInfo>>(mContext,mView) {
-                    @Override
-                    public void onNext(PageBean<AppInfo> appInfoPageBean) {
-                        mView.showResult(appInfoPageBean.getDatas());
+                        mView.showResult(indexBean);
                     }
                 });
+
+//        RxPermissions rxPermissions = new RxPermissions((Activity) mContext);
+//
+//        rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
+//                .flatMap(new Func1<Boolean, Observable<PageBean<AppInfo>>>() {
+//                    @Override
+//                    public Observable<PageBean<AppInfo>>call(Boolean aBoolean) {
+//
+//                        if(aBoolean){
+//
+//                            System.out.println("允许权限");
+//                            return  mModel.getApps().compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult());
+//                        }
+//                        else{
+//                            System.out.println("拒绝权限");
+//                            return Observable.empty();
+//                        }
+//
+//
+//                    }
+//                })
+//                .subscribe(new ProgressSubcriber<PageBean<AppInfo>>(mContext,mView) {
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> appInfoPageBean) {
+//                        mView.showResult(appInfoPageBean.getDatas());
+//                    }
+//                });
 
 
 //        mModel.getApps()

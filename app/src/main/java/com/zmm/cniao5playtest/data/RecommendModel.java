@@ -3,6 +3,7 @@ package com.zmm.cniao5playtest.data;
 
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.BaseBean;
+import com.zmm.cniao5playtest.bean.IndexBean;
 import com.zmm.cniao5playtest.bean.PageBean;
 import com.zmm.cniao5playtest.data.http.ApiService;
 
@@ -62,5 +63,9 @@ public class RecommendModel {
         return apiService.getApps2();
     }
 
+    public Observable<BaseBean<IndexBean>> index(){
+
+        return  mApiService.index();
+    }
 
 }
