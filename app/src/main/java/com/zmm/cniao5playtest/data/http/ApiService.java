@@ -4,8 +4,11 @@ package com.zmm.cniao5playtest.data.http;
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.BaseBean;
 import com.zmm.cniao5playtest.bean.PageBean;
+import com.zmm.cniao5playtest.bean.requestbean.LoginRequestBean;
 
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -36,4 +39,6 @@ public interface ApiService {
     @GET("featured2")
     Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
 
+    @POST("login")
+    Observable<BaseBean> login(@Body LoginRequestBean bean);
 }

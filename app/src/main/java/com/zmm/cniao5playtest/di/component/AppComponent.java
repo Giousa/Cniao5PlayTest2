@@ -2,6 +2,7 @@ package com.zmm.cniao5playtest.di.component;
 
 import android.app.Application;
 
+import com.google.gson.Gson;
 import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.data.http.ApiService;
 import com.zmm.cniao5playtest.di.module.AppModule;
@@ -28,4 +29,6 @@ public interface AppComponent {
     Application getApplication();
 
     RxErrorHandler getRxErrorHandler();
+
+    Gson getGson();
 }
