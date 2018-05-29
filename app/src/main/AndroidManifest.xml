@@ -24,6 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+            android:value="GlideModule"/>
+
+
         <activity android:name=".ui.activity.MainActivity"/>
 
         <activity android:name=".ui.activity.GuideActivity"

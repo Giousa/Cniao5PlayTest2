@@ -3,6 +3,7 @@ package com.zmm.cniao5playtest.data.http;
 
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.BaseBean;
+import com.zmm.cniao5playtest.bean.IndexBean;
 import com.zmm.cniao5playtest.bean.PageBean;
 import com.zmm.cniao5playtest.bean.requestbean.LoginRequestBean;
 
@@ -41,4 +42,13 @@ public interface ApiService {
 
     @POST("login")
     Observable<BaseBean> login(@Body LoginRequestBean bean);
+
+    @GET("index")
+    Observable<BaseBean<IndexBean>> index();
+
+    @GET("toplist")
+    Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
+
+    @GET("game")
+    Observable<BaseBean<PageBean<AppInfo>>> games(@Query("page") int page);
 }
