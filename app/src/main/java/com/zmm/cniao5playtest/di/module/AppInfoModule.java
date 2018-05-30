@@ -15,24 +15,24 @@ import dagger.Provides;
  */
 
 @Module
-public class RecommendModule {
+public class AppInfoModule {
 
 
-    private AppInfoContract.View mView;
+    private AppInfoContract.AppInfoView mView;
 
-    public RecommendModule(AppInfoContract.View view) {
+    public AppInfoModule(AppInfoContract.AppInfoView view) {
         mView = view;
     }
 
 
     @Provides
-    public AppInfoContract.View proviceRecommendView(){
+    public AppInfoContract.AppInfoView proviceRecommendView(){
 
         return mView;
     }
 
     @Provides
-    public AppInfoModel proviceRecommendModel(ApiService apiService){
+    public AppInfoModel proviceModel(ApiService apiService){
 
         return new AppInfoModel(apiService);
     }

@@ -6,30 +6,32 @@ import com.zmm.cniao5playtest.di.module.AppInfoModule;
 import com.zmm.cniao5playtest.presenter.AppInfoPresenter;
 import com.zmm.cniao5playtest.ui.adapter.AppInfoAdapter;
 
+
 /**
  * Created by Ivan on 16/9/26.
  */
 
-public class GamesFragment extends BaseAppInfoFragment {
+public class TopListFragment extends BaseAppInfoFragment {
 
 
+    @Override
+    int type() {
+        return AppInfoPresenter.TOP_LIST;
+    }
+
+    @Override
+    AppInfoAdapter buildAdapter() {
+        return  AppInfoAdapter.builder().showPosition(true).showBrief(false).showCategoryName(true).build();
+    }
 
 
     @Override
     public void setupAcitivtyComponent(AppComponent appComponent) {
 
         DaggerAppInfoComponent.builder().appComponent(appComponent).appInfoModule(new AppInfoModule(this))
-                .build().injectGamesFragment(this);
+                .build().injectTopListFragment(this);
+
     }
 
-    @Override
-    int type() {
-        return AppInfoPresenter.GAME;
-    }
 
-    @Override
-    AppInfoAdapter buildAdapter() {
-        return  AppInfoAdapter.builder().showPosition(false).showBrief(true).showCategoryName(true).build();
-    }
 }
-

@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.zmm.cniao5playtest.ui.bean.FragmentInfo;
 import com.zmm.cniao5playtest.ui.fragment.CategoryFragment;
 import com.zmm.cniao5playtest.ui.fragment.GamesFragment;
-import com.zmm.cniao5playtest.ui.fragment.RankingFragment;
+import com.zmm.cniao5playtest.ui.fragment.TopListFragment;
 import com.zmm.cniao5playtest.ui.fragment.RecommendFragment;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private void initFragments(){
 
         mFragments.add(new FragmentInfo("推荐",RecommendFragment.class));
-        mFragments.add(new FragmentInfo ("排行", RankingFragment.class));
+        mFragments.add(new FragmentInfo ("排行", TopListFragment.class));
 
 
         mFragments.add(new FragmentInfo ("游戏", GamesFragment.class));
@@ -69,7 +69,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 //                break;
 //
 //            case 1:
-//                fragment = new RankingFragment();
+//                fragment = new TopListFragment();
 //                break;
 //
 //            case 2:

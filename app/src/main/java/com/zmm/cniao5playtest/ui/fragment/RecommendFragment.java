@@ -4,21 +4,15 @@ import android.app.ProgressDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.zmm.cniao5playtest.R;
-import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.IndexBean;
 import com.zmm.cniao5playtest.di.component.AppComponent;
 import com.zmm.cniao5playtest.di.component.DaggerRecommendComponent;
 import com.zmm.cniao5playtest.di.module.RecommendModule;
 import com.zmm.cniao5playtest.presenter.RecommendPresenter;
-import com.zmm.cniao5playtest.presenter.contract.RecommendContract;
+import com.zmm.cniao5playtest.presenter.contract.AppInfoContract;
 import com.zmm.cniao5playtest.ui.adapter.IndexMultipleAdapter;
-import com.zmm.cniao5playtest.ui.adapter.RecomendAppAdatper;
-import com.zmm.cniao5playtest.ui.decoration.DividerItemDecoration;
-
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -26,7 +20,7 @@ import butterknife.BindView;
  * Created by Ivan on 16/9/26.
  */
 
-public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements RecommendContract.View {
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements AppInfoContract.View {
 
     @BindView(R.id.recycle_view)
     RecyclerView mRecyclerView;

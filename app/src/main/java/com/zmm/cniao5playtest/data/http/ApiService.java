@@ -43,12 +43,26 @@ public interface ApiService {
     @POST("login")
     Observable<BaseBean> login(@Body LoginRequestBean bean);
 
+    /**
+     * 推荐模块接口
+     * @return
+     */
     @GET("index")
     Observable<BaseBean<IndexBean>> index();
 
+    /**
+     * 推荐模块接口，分页功能
+     * @param page
+     * @return
+     */
     @GET("toplist")
     Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
 
+    /**
+     * 游戏模块接口，分页功能
+     * @param page
+     * @return
+     */
     @GET("game")
     Observable<BaseBean<PageBean<AppInfo>>> games(@Query("page") int page);
 }

@@ -1,43 +1,24 @@
 package com.zmm.cniao5playtest.presenter;
 
 
-import android.Manifest;
-import android.app.Activity;
-import android.support.v4.app.Fragment;
-
-import com.tbruyelle.rxpermissions.RxPermissions;
-import com.zmm.cniao5playtest.bean.AppInfo;
-import com.zmm.cniao5playtest.bean.BaseBean;
 import com.zmm.cniao5playtest.bean.IndexBean;
-import com.zmm.cniao5playtest.bean.PageBean;
-import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.common.rx.RxHttpResponseCompat;
-import com.zmm.cniao5playtest.common.rx.subscriber.ErrorHandlerSubscriber;
-import com.zmm.cniao5playtest.common.rx.subscriber.ProgressDialogSubscriber;
 import com.zmm.cniao5playtest.common.rx.subscriber.ProgressSubcriber;
-import com.zmm.cniao5playtest.data.RecommendModel;
-import com.zmm.cniao5playtest.presenter.contract.RecommendContract;
+import com.zmm.cniao5playtest.data.AppInfoModel;
+import com.zmm.cniao5playtest.presenter.contract.AppInfoContract;
 
 import javax.inject.Inject;
-
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Ivan on 2017/1/3.
  */
 
-public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendContract.View> {
+public class RecommendPresenter extends BasePresenter<AppInfoModel,AppInfoContract.View> {
 
 
 
     @Inject
-    public RecommendPresenter(RecommendModel model, RecommendContract.View view) {
+    public RecommendPresenter(AppInfoModel model, AppInfoContract.View view) {
         super(model, view);
     }
 

@@ -20,12 +20,12 @@ import rx.Observable;
  * Created by Ivan on 2017/1/3.
  */
 
-public class RecommendModel {
+public class AppInfoModel {
 
 
     private ApiService mApiService;
 
-    public RecommendModel(ApiService apiService) {
+    public AppInfoModel(ApiService apiService) {
         mApiService = apiService;
     }
 
@@ -66,6 +66,14 @@ public class RecommendModel {
     public Observable<BaseBean<IndexBean>> index(){
 
         return  mApiService.index();
+    }
+
+    public Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
+        return mApiService.topList(page);
+    }
+
+    public Observable<BaseBean<PageBean<AppInfo>>> games(int page){
+        return mApiService.games(page);
     }
 
 }
