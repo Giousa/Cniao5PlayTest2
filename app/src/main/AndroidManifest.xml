@@ -36,6 +36,8 @@
                   android:theme="@style/AppTheme.Notitle.FullScreen"/>
 
         <activity android:name=".ui.activity.LoginActivity"/>
+
+        <activity android:name=".ui.activity.CategoryAppActivity"/>
     </application>
 
 </manifest>

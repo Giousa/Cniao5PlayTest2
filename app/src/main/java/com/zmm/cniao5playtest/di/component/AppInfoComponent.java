@@ -2,6 +2,7 @@ package com.zmm.cniao5playtest.di.component;
 
 import com.zmm.cniao5playtest.di.FragmentScope;
 import com.zmm.cniao5playtest.di.module.AppInfoModule;
+import com.zmm.cniao5playtest.ui.fragment.CategoryAppFragment;
 import com.zmm.cniao5playtest.ui.fragment.GamesFragment;
 import com.zmm.cniao5playtest.ui.fragment.TopListFragment;
 
@@ -20,4 +21,5 @@ public interface AppInfoComponent {
 
     void injectTopListFragment(TopListFragment fragment);
     void injectGamesFragment(GamesFragment fragment);
+    void injectCategoryAppFragment(CategoryAppFragment fragment);
 }

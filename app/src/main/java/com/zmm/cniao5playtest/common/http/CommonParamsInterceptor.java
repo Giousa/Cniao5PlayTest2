@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.zmm.cniao5playtest.common.Constant;
+import com.zmm.cniao5playtest.common.util.ACache;
 import com.zmm.cniao5playtest.common.util.DensityUtil;
 import com.zmm.cniao5playtest.common.util.DeviceUtils;
 
@@ -68,6 +69,10 @@ public class CommonParamsInterceptor  implements Interceptor {
                 commomParamsMap.put(Constant.RESOLUTION, DensityUtil.getScreenW(mContext)+"*" + DensityUtil.getScreenH(mContext));
                 commomParamsMap.put(Constant.SDK, DeviceUtils.getBuildVersionSDK()+"");
                 commomParamsMap.put(Constant.DENSITY_SCALE_FACTOR,mContext.getResources().getDisplayMetrics().density+"");
+
+
+                String token = ACache.get(mContext).getAsString(Constant.TOKEN);
+                commomParamsMap.put(Constant.TOKEN,token==null?"":token);
 
 
                 if(method.equals("GET")){
