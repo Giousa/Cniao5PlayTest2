@@ -12,17 +12,18 @@ package com.zmm.cniao5playtest.bean.requestbean;
 
 public class LoginRequestBean {
 
-    private String phone;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
 
     private String password;
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getPassword() {
         return password;

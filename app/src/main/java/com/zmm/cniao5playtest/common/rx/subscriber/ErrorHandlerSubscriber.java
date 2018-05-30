@@ -1,10 +1,12 @@
 package com.zmm.cniao5playtest.common.rx.subscriber;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.zmm.cniao5playtest.common.exception.BaseException;
 import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
+import com.zmm.cniao5playtest.ui.activity.LoginActivity;
 
 /**
  * Description:
@@ -41,7 +43,16 @@ public abstract class ErrorHandlerSubscriber<T> extends DefaultSubscriber<T> {
             Log.d("ErrorHandlerSubscriber",e.getMessage());
         } else {
             mRxErrorHandler.showErrorMessage(baseException);
+            if(baseException.getCode() == BaseException.ERROR_TOKEN){
+                toLogin();
+            }
         }
 
+    }
+
+    private void toLogin() {
+
+        Intent intent = new Intent(mContext, LoginActivity.class);
+        mContext.startActivity(intent);
     }
 }

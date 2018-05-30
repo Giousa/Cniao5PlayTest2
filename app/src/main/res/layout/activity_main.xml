@@ -37,6 +37,9 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:tabTextColor="@color/md_white_1000"
+            app:tabSelectedTextColor="@color/md_white_1000"
             app:tabMode="fixed">
 
 

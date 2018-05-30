@@ -74,4 +74,10 @@ dependencies {
     //分层加载列表
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.0'
 
+    //RxBinding
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
+
+    //RxBus
+    compile 'com.hwangjr.rxbus:rxbus:1.0.5'
+
 }

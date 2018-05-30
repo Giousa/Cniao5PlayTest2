@@ -4,6 +4,7 @@ package com.zmm.cniao5playtest.data.http;
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.BaseBean;
 import com.zmm.cniao5playtest.bean.IndexBean;
+import com.zmm.cniao5playtest.bean.LoginBean;
 import com.zmm.cniao5playtest.bean.PageBean;
 import com.zmm.cniao5playtest.bean.requestbean.LoginRequestBean;
 
@@ -40,8 +41,6 @@ public interface ApiService {
     @GET("featured2")
     Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
 
-    @POST("login")
-    Observable<BaseBean> login(@Body LoginRequestBean bean);
 
     /**
      * 推荐模块接口
@@ -65,4 +64,13 @@ public interface ApiService {
      */
     @GET("game")
     Observable<BaseBean<PageBean<AppInfo>>> games(@Query("page") int page);
+
+    /**
+     * 登录接口
+     * @param param
+     * @return
+     */
+    @POST("login")
+    Observable<BaseBean<LoginBean>> login(@Body LoginRequestBean param);
+
 }
