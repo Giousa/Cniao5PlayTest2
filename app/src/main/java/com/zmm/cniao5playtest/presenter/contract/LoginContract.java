@@ -20,14 +20,7 @@ public interface LoginContract {
 
 
     interface  ILoginModel{
-
-
-
         Observable<BaseBean<LoginBean>> login(String phone, String pwd);
-
-
-
-
     }
 
 

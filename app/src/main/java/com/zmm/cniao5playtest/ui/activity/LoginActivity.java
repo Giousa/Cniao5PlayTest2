@@ -1,12 +1,9 @@
 package com.zmm.cniao5playtest.ui.activity;
 
-import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import com.hwangjr.rxbus.RxBus;
+
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -21,7 +18,6 @@ import com.zmm.cniao5playtest.presenter.contract.LoginContract;
 import com.zmm.cniao5playtest.ui.widget.LoadingButton;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func2;

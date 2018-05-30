@@ -49,34 +49,35 @@ public class LoginPresenter extends BasePresenter<LoginContract.ILoginModel,Logi
        }
 
 
-        mModel.login(phone,pwd).compose(RxHttpResponseCompat.<LoginBean>compatResult())
-        .subscribe(new ErrorHandlerSubscriber<LoginBean>(mContext) {
-            @Override
-            public void onStart() {
+        mModel.login(phone,pwd)
+                .compose(RxHttpResponseCompat.<LoginBean>compatResult())
+                .subscribe(new ErrorHandlerSubscriber<LoginBean>(mContext) {
+                    @Override
+                    public void onStart() {
 
-                mView.showLoading();
-            }
+                        mView.showLoading();
+                    }
 
-            @Override
-            public void onCompleted() {
+                    @Override
+                    public void onCompleted() {
 
-                mView.dismissLoading();
-            }
+                        mView.dismissLoading();
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                super.onError(e);
-                mView.dismissLoading();
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        mView.dismissLoading();
+                    }
 
-            @Override
-            public void onNext(LoginBean loginBean) {
-                mView.loginSuccess(loginBean);
-                saveUser(loginBean);
+                    @Override
+                    public void onNext(LoginBean loginBean) {
+                        mView.loginSuccess(loginBean);
+                        saveUser(loginBean);
 
-                RxBus.get().post(loginBean.getUser());
-            }
-        });
+                        RxBus.get().post(loginBean.getUser());
+                    }
+                });
 
 
 
