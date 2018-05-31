@@ -3,7 +3,7 @@ package com.zmm.cniao5playtest.di.component;
 
 import com.zmm.cniao5playtest.di.FragmentScope;
 import com.zmm.cniao5playtest.di.module.AppDetailModule;
-import com.zmm.cniao5playtest.ui.activity.AppDetailActivity;
+import com.zmm.cniao5playtest.ui.fragment.AppDetailFragment;
 
 import dagger.Component;
 
@@ -23,6 +23,6 @@ public interface AppDetailComponent {
 
 
 
-    void inject(AppDetailActivity appDetailActivity);
+    void inject(AppDetailFragment appDetailFragment);
 
 }

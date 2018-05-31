@@ -6,18 +6,29 @@ import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.ionicons_typeface_library.Ionicons;
 import com.zmm.cniao5playtest.R;
 import com.zmm.cniao5playtest.bean.AppInfo;
+import com.zmm.cniao5playtest.common.Constant;
+import com.zmm.cniao5playtest.common.imageloader.ImageLoader;
 import com.zmm.cniao5playtest.common.util.DensityUtil;
 import com.zmm.cniao5playtest.di.component.AppComponent;
 import com.zmm.cniao5playtest.presenter.AppDetailPresenter;
-import com.zmm.cniao5playtest.presenter.contract.AppInfoContract;
+import com.zmm.cniao5playtest.ui.fragment.AppDetailFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,12 +40,24 @@ import butterknife.ButterKnife;
  * Time:下午11:04
  */
 
-public class AppDetailActivity extends BaseActivity<AppDetailPresenter> implements AppInfoContract.AppDetailView {
+public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
 
+    @BindView(R.id.view_temp)
+    View mViewTemp;
+    @BindView(R.id.img_icon)
+    ImageView mImgIcon;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.app_bar)
+    AppBarLayout mAppBar;
+    @BindView(R.id.txt_name)
+    TextView mTxtName;
+    @BindView(R.id.view_coordinator)
+    CoordinatorLayout mToolbarLayout;
     @BindView(R.id.view_content)
     FrameLayout mViewContent;
-    @BindView(R.id.activity_app_detail)
-    LinearLayout mActivityAppDetail;
+
+    private AppInfo mAppInfo;
 
     @Override
     protected int setLayout() {
@@ -43,6 +66,33 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> implemen
 
     @Override
     protected void init() {
+
+        mAppInfo = (AppInfo) getIntent().getSerializableExtra(Constant.APPINFO);
+
+        //=======================
+        ImageLoader.load(Constant.BASE_IMG_URL+mAppInfo.getIcon(),mImgIcon);
+        mTxtName.setText(mAppInfo.getDisplayName());
+
+
+
+
+        mToolbar.setNavigationIcon(
+                new IconicsDrawable(this)
+                        .icon(Ionicons.Icon.ion_ios_arrow_back)
+                        .sizeDp(16)
+                        .color(getResources().getColor(R.color.md_white_1000)
+                        )
+        );
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        //=======================
 
         View view = mAppApplication.getView();
 
@@ -63,16 +113,16 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> implemen
         //获取状态栏高度，目的是减去这个高度，防止偏移
         int statusBarH = DensityUtil.getStatusBarH(this);
 
-        ViewGroup.MarginLayoutParams marginLayoutParams = new LinearLayout.LayoutParams(mViewContent.getLayoutParams());
+        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(mViewTemp.getLayoutParams());
 
-        marginLayoutParams.topMargin = top - statusBarH;
+        marginLayoutParams.topMargin=top-statusBarH;
         marginLayoutParams.leftMargin = left;
         marginLayoutParams.width = view.getWidth();
-        marginLayoutParams.height = view.getHeight();
+        marginLayoutParams.height =view.getHeight();
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(marginLayoutParams);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(marginLayoutParams);
 
-        mViewContent.setLayoutParams(layoutParams);
+        mViewTemp.setLayoutParams(params);
 
         open();
     }
@@ -108,43 +158,51 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> implemen
         int h = DensityUtil.getScreenH(this);
 
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mViewContent, "scaleY", 1f, (float) h);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mViewTemp, "scaleY", 1f, (float) h);
+
+        animator.setStartDelay(500);
+        animator.setDuration(1000);
 
         animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-            }
 
             @Override
             public void onAnimationStart(Animator animation) {
-                mViewContent.setBackgroundColor(getResources().getColor(R.color.white));
+                mViewTemp.setBackgroundColor(getResources().getColor(R.color.white));
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+                mViewTemp.setVisibility(View.GONE);
+                mToolbarLayout.setVisibility(View.VISIBLE);
+
+                //动画结束，进入Fragment
+                initFragment();
             }
         });
 
-        animator.setStartDelay(1000);
-        animator.setDuration(10000);
+
         animator.start();
     }
 
-    @Override
-    public void showLoading() {
+    private void initFragment() {
+
+
+        AppDetailFragment fragment = new AppDetailFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.APPINFO_ID, mAppInfo.getId());//这里的values就是我们要传的值
+        fragment.setArguments(bundle);
+
+        FragmentManager manager = getSupportFragmentManager();
+
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        transaction.add(R.id.view_content, fragment);
+        transaction.commitAllowingStateLoss();
+
 
     }
 
-    @Override
-    public void showError(String msg) {
-
-    }
-
-    @Override
-    public void dismissLoading() {
-
-    }
-
-    @Override
-    public void showAppDetail(AppInfo appInfo) {
-
-    }
 }

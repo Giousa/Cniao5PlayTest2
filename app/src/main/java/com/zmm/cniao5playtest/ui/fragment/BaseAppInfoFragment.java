@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.zmm.cniao5playtest.R;
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.PageBean;
+import com.zmm.cniao5playtest.common.Constant;
 import com.zmm.cniao5playtest.presenter.AppInfoPresenter;
 import com.zmm.cniao5playtest.presenter.contract.AppInfoContract;
 import com.zmm.cniao5playtest.ui.activity.AppDetailActivity;
@@ -72,9 +73,13 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
 
 
+                AppInfo appInfo = mAdapter.getItem(position);
+
+
                 mApplication.setView(view);
 
                 Intent intent = new Intent(getActivity(), AppDetailActivity.class);
+                intent.putExtra(Constant.APPINFO,appInfo);
                 getActivity().startActivity(intent);
             }
         });

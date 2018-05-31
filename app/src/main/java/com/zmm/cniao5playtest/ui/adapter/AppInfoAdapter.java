@@ -83,7 +83,7 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
 
 
 
-
+        private int layoutId=R.layout.template_appinfo;
 
 
         public Builder showPosition(boolean b){
@@ -112,7 +112,10 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
             return  new AppInfoAdapter(this);
         }
 
-
+        public Builder layout(int resId){
+            this.layoutId = resId;
+            return this;
+        }
 
 
 
