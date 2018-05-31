@@ -70,6 +70,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void init() {
 
+        //Rxjava2.0版本
 
         RxBus.get().register(this);
 
