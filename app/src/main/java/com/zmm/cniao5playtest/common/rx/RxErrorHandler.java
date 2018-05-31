@@ -10,7 +10,8 @@ import com.zmm.cniao5playtest.common.exception.ErrorMessageFactory;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
-import retrofit2.adapter.rxjava.HttpException;
+import retrofit2.HttpException;
+
 
 /**
  * Description:

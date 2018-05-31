@@ -1,6 +1,6 @@
 package com.zmm.cniao5playtest.common.rx.subscriber;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
 
 /**
  * Description:
@@ -9,6 +9,6 @@ import rx.Subscriber;
  * Time:上午11:45
  */
 
-public abstract class DefaultSubscriber<T> extends Subscriber<T>{
+public abstract class DefaultSubscriber<T> implements Observer<T>{
 
 }

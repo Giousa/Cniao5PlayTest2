@@ -7,6 +7,8 @@ import com.zmm.cniao5playtest.common.rx.RxErrorHandler;
 import com.zmm.cniao5playtest.common.util.ProgressDialogHandler;
 import com.zmm.cniao5playtest.ui.BaseView;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Description:
  * Author:zhangmengmeng
@@ -18,6 +20,8 @@ public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber
 
 
     private ProgressDialogHandler mProgressDialogHandler;
+
+    private Disposable mDisposable;
 
 
     public ProgressDialogSubscriber(Context context) {
@@ -32,20 +36,22 @@ public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber
 
     @Override
     public void onCancelProgress() {
-        unsubscribe();
+        //取消订阅
+        mDisposable.dispose();
     }
 
     @Override
-    public void onStart() {
+    public void onSubscribe(Disposable d) {
 
+        this.mDisposable = d;
         if(isShowProgressDialog()){
             this.mProgressDialogHandler.showProgressDialog();
         }
-
     }
 
+
     @Override
-    public void onCompleted() {
+    public void onComplete() {
 
         if(isShowProgressDialog()){
             this.mProgressDialogHandler.dismissProgressDialog();

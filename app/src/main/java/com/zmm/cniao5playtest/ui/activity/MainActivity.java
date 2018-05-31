@@ -17,8 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.hwangjr.rxbus.RxBus;
-import com.hwangjr.rxbus.annotation.Subscribe;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
 import com.zmm.cniao5playtest.R;
@@ -26,13 +24,14 @@ import com.zmm.cniao5playtest.bean.User;
 import com.zmm.cniao5playtest.common.Constant;
 import com.zmm.cniao5playtest.common.font.Cniao5Font;
 import com.zmm.cniao5playtest.common.imageloader.GlideCircleTransform;
+import com.zmm.cniao5playtest.common.rx.RxBus;
 import com.zmm.cniao5playtest.common.util.ACache;
 import com.zmm.cniao5playtest.common.util.PermissionUtil;
 import com.zmm.cniao5playtest.di.component.AppComponent;
 import com.zmm.cniao5playtest.ui.adapter.ViewPagerAdapter;
 
 import butterknife.BindView;
-import rx.functions.Action1;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity {
 
@@ -72,12 +71,20 @@ public class MainActivity extends BaseActivity {
 
         //Rxjava2.0版本
 
-        RxBus.get().register(this);
+//        RxBus.get().register(this);
+
+        RxBus.getDefault().toObservable(User.class).subscribe(new Consumer<User>() {
+            @Override
+            public void accept(User user) throws Exception {
+                initUserHeadView(user);
+            }
+        });
+
 
         PermissionUtil.requestPermisson(this, Manifest.permission.READ_PHONE_STATE)
-                .subscribe(new Action1<Boolean>() {
+                .subscribe(new Consumer<Boolean>() {
                     @Override
-                    public void call(Boolean aBoolean) {
+                    public void accept(Boolean aBoolean) {
 
                         if(aBoolean){
                             initDrawerLayout();
@@ -184,13 +191,13 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Subscribe
-    public void getUser(User user){
-
-        initUserHeadView(user);
-
-
-    }
+//    @Subscribe
+//    public void getUser(User user){
+//
+//        initUserHeadView(user);
+//
+//
+//    }
 
     private void initUserHeadView(User user){
 
@@ -224,9 +231,9 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        RxBus.get().unregister(this);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        RxBus.get().unregister(this);
+//    }
 }

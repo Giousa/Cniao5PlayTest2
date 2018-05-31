@@ -7,7 +7,7 @@ import com.zmm.cniao5playtest.bean.requestbean.LoginRequestBean;
 import com.zmm.cniao5playtest.data.http.ApiService;
 import com.zmm.cniao5playtest.presenter.contract.LoginContract;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * 菜鸟窝http://www.cniao5.com 一个高端的互联网技能学习平台

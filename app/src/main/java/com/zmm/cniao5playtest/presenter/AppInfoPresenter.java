@@ -9,10 +9,14 @@ import com.zmm.cniao5playtest.common.rx.subscriber.ProgressSubcriber;
 import com.zmm.cniao5playtest.data.AppInfoModel;
 import com.zmm.cniao5playtest.presenter.contract.AppInfoContract;
 
+import org.reactivestreams.Subscriber;
+
 import javax.inject.Inject;
 
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 
 /**
  * 菜鸟窝http://www.cniao5.com 一个高端的互联网技能学习平台
@@ -50,7 +54,7 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel,AppInfoContract
     public void  request(int type,int page,int categoryId,int flagType){
 
 
-        Subscriber subscriber =null;
+        Observer subscriber =null;
 
         if(page==0){
 
@@ -68,9 +72,14 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel,AppInfoContract
             // 加载下一页
             subscriber = new ErrorHandlerSubscriber<PageBean<AppInfo>>(mContext) {
                 @Override
-                public void onCompleted() {
+                public void onComplete() {
 
                     mView.onLoadMoreComplete();
+                }
+
+                @Override
+                public void onSubscribe(Disposable d) {
+
                 }
 
                 @Override

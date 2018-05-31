@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '28.0.0 rc2'
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
         applicationId "com.zmm.cniao5playtest"
-        minSdkVersion 18
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,8 +21,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["design"]
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -31,23 +31,6 @@ dependencies {
     //字体
     compile 'com.mikepenz:iconics-core:3.0.1@aar'
     compile 'com.mikepenz:ionicons-typeface:2.0.1.4@aar'
-
-    //butterknife
-    compile 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    ////RxJava
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.6'
-
-    //retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-
-    // okHttp
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 
     //picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -63,8 +46,6 @@ dependencies {
 
     compile 'com.github.f0ris.sweetalert:library:1.5.1'
 
-    //权限授权
-    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
 
     //图片加载框架
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -74,14 +55,41 @@ dependencies {
     //分层加载列表
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.0'
 
-    //RxBinding
-    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
-
-    //RxBus
-    compile 'com.hwangjr.rxbus:rxbus:1.0.5'
-
     compile 'com.ms-square:expandableTextView:0.1.4'
 
     compile 'com.zoonref:simple-view-behavior:1.0'
+
+    /////////////////////////////////////
+
+    //butterknife
+    compile rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+
+    ////RxJava
+//    compile 'io.reactivex:rxandroid:1.2.1'
+//    compile 'io.reactivex:rxjava:1.1.6'
+    compile rootProject.ext.dependencies["rxjava"]
+    compile rootProject.ext.dependencies["rxandroid"]
+
+    //retrofit
+    compile rootProject.ext.dependencies['retrofit'] // 需要升级
+    compile rootProject.ext.dependencies['retrofit-adapter-rxjava']// 需要升级
+    compile rootProject.ext.dependencies['retrofit-converter-gson']
+
+    // okHttp
+    compile rootProject.ext.dependencies["okhttp"]  // 需要升级
+    compile rootProject.ext.dependencies["okhttp-logging-interceptor"]
+
+    //RxBinding
+//    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
+    compile rootProject.ext.dependencies["rxbinding"] // 需要升级
+
+    //RxBus
+//    compile 'com.hwangjr.rxbus:rxbus:1.0.5'
+
+    //权限授权
+//    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.8.2@aar' //降级
+
 
 }

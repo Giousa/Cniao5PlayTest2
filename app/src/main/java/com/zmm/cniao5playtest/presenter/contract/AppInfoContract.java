@@ -15,7 +15,7 @@ public interface AppInfoContract {
 
     interface View extends BaseView {
 
-        void  showResult(IndexBean indexBean);
+        void showResult(IndexBean indexBean);
 
 
 //        void onRequestPermissonSuccess();
@@ -24,7 +24,7 @@ public interface AppInfoContract {
 
     interface AppInfoView extends BaseView{
 
-        void  showResult(PageBean<AppInfo> page);
+        void showResult(PageBean<AppInfo> page);
 
         void onLoadMoreComplete();
 

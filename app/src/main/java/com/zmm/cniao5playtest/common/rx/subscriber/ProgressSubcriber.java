@@ -6,6 +6,8 @@ import android.util.Log;
 import com.zmm.cniao5playtest.common.exception.BaseException;
 import com.zmm.cniao5playtest.ui.BaseView;
 
+import io.reactivex.disposables.Disposable;
+
 
 /**
  * 菜鸟窝http://www.cniao5.com 一个高端的互联网技能学习平台
@@ -40,7 +42,7 @@ public  abstract  class ProgressSubcriber<T> extends ErrorHandlerSubscriber<T>  
 
 
     @Override
-    public void onStart() {
+    public void onSubscribe(Disposable d) {
 
         if(isShowProgress()){
             mView.showLoading();
@@ -49,7 +51,7 @@ public  abstract  class ProgressSubcriber<T> extends ErrorHandlerSubscriber<T>  
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
 
             mView.dismissLoading();
     }

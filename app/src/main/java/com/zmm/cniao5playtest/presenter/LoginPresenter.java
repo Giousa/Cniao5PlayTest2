@@ -2,9 +2,9 @@ package com.zmm.cniao5playtest.presenter;
 
 import android.util.Log;
 
-import com.hwangjr.rxbus.RxBus;
 import com.zmm.cniao5playtest.bean.LoginBean;
 import com.zmm.cniao5playtest.common.Constant;
+import com.zmm.cniao5playtest.common.rx.RxBus;
 import com.zmm.cniao5playtest.common.rx.RxHttpResponseCompat;
 import com.zmm.cniao5playtest.common.rx.subscriber.ErrorHandlerSubscriber;
 import com.zmm.cniao5playtest.common.util.ACache;
@@ -12,6 +12,8 @@ import com.zmm.cniao5playtest.common.util.VerificationUtils;
 import com.zmm.cniao5playtest.presenter.contract.LoginContract;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * 菜鸟窝http://www.cniao5.com 一个高端的互联网技能学习平台
@@ -53,13 +55,13 @@ public class LoginPresenter extends BasePresenter<LoginContract.ILoginModel,Logi
                 .compose(RxHttpResponseCompat.<LoginBean>compatResult())
                 .subscribe(new ErrorHandlerSubscriber<LoginBean>(mContext) {
                     @Override
-                    public void onStart() {
+                    public void onSubscribe(Disposable d) {
 
                         mView.showLoading();
                     }
 
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
 
                         mView.dismissLoading();
                     }
@@ -75,7 +77,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.ILoginModel,Logi
                         mView.loginSuccess(loginBean);
                         saveUser(loginBean);
 
-                        RxBus.get().post(loginBean.getUser());
+                        //登录成功，发送消息
+//                        RxBus.get().post(loginBean.getUser());
+                        RxBus.getDefault().post(loginBean.getUser());
                     }
                 });
 
