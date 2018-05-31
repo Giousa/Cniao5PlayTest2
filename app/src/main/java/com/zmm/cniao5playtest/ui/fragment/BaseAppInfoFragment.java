@@ -1,14 +1,18 @@
 package com.zmm.cniao5playtest.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.zmm.cniao5playtest.R;
 import com.zmm.cniao5playtest.bean.AppInfo;
 import com.zmm.cniao5playtest.bean.PageBean;
 import com.zmm.cniao5playtest.presenter.AppInfoPresenter;
 import com.zmm.cniao5playtest.presenter.contract.AppInfoContract;
+import com.zmm.cniao5playtest.ui.activity.AppDetailActivity;
 import com.zmm.cniao5playtest.ui.adapter.AppInfoAdapter;
 import com.zmm.cniao5playtest.ui.widget.DividerItemDecoration;
 
@@ -62,6 +66,18 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
 
         mAdapter.setOnLoadMoreListener(this);
         mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+
+                mApplication.setView(view);
+
+                Intent intent = new Intent(getActivity(), AppDetailActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
 
     }
 

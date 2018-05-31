@@ -1,6 +1,7 @@
 package com.zmm.cniao5playtest.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.zmm.cniao5playtest.R;
 import com.zmm.cniao5playtest.bean.Banner;
 import com.zmm.cniao5playtest.bean.IndexBean;
 import com.zmm.cniao5playtest.common.imageloader.ImageLoader;
+import com.zmm.cniao5playtest.ui.activity.AppDetailActivity;
 import com.zmm.cniao5playtest.ui.widget.BannerLayout;
 import com.zmm.cniao5playtest.ui.widget.DividerItemDecoration;
 

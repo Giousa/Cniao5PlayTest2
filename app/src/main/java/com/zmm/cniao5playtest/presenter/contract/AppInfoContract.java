@@ -30,4 +30,9 @@ public interface AppInfoContract {
 
     }
 
+    interface  AppDetailView extends BaseView{
+
+        void showAppDetail(AppInfo appInfo);
+    }
+
 }

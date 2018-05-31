@@ -1,7 +1,5 @@
 package com.zmm.cniao5playtest.di.module;
 
-import com.zmm.cniao5playtest.data.AppInfoModel;
-import com.zmm.cniao5playtest.data.http.ApiService;
 import com.zmm.cniao5playtest.presenter.contract.AppInfoContract;
 
 import dagger.Module;
@@ -14,7 +12,7 @@ import dagger.Provides;
  * Time:下午3:51
  */
 
-@Module
+@Module(includes = AppModelModule.class)
 public class AppInfoModule {
 
 
@@ -31,9 +29,5 @@ public class AppInfoModule {
         return mView;
     }
 
-    @Provides
-    public AppInfoModel proviceModel(ApiService apiService){
 
-        return new AppInfoModel(apiService);
-    }
 }

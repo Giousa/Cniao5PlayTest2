@@ -100,4 +100,13 @@ public interface ApiService {
 
     @GET("category/newlist/{categoryid}")
     Observable<BaseBean<PageBean<AppInfo>>> getNewListAppsByCategory(@Path("categoryid") int categoryid,@Query("page") int page);
+
+
+    /**
+     * 应用详情界面
+     * @param id
+     * @return
+     */
+    @GET("app/{id}")
+    Observable<BaseBean<AppInfo>> getAppDetail(@Path("id") int id);
 }
